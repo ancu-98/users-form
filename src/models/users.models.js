@@ -31,7 +31,13 @@ const Users = db.define('users',{
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            is: {
+                args: /^(?=.*[A-Z])(?=.*[a-z]).{8,}$/,
+                msg: 'Password must contain at least one uppercase letter, one lowercase letter, and be at least 8 characters long'
+            }
+        }
     },
     gender: {
         type: DataTypes.STRING,

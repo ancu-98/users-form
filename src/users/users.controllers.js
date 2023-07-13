@@ -15,7 +15,7 @@ const findAllUsers = async () => {
     return data
 };
 
-const findUserById = async () => {
+const findUserById = async (id) => {
     const data = await Users.findOne({
         attributes: {
             exclude: ['password', 'createdAt', 'updatedAt']
