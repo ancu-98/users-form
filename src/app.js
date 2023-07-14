@@ -29,7 +29,7 @@ db.sync()
 //? Initialize my models relations
 initModels();
 
-//? Routes v1
+//? Root Route
 app.get('/', (req, res) => {
     res.status(200).json({
         status: 200,
@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     })
 });
 
-//? Definimos prefijo rutas
+//? Defining routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/users', authRouter);
 

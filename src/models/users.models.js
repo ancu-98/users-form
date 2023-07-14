@@ -1,8 +1,7 @@
-const {DataTypes} = require('sequelize');
-
+const { DataTypes } = require('sequelize');
 const db = require('../utils/database');
 
-const Users = db.define('users',{
+const Users = db.define('users', {
     id: {
         type: DataTypes.UUID,
         primaryKey: true
@@ -11,14 +10,14 @@ const Users = db.define('users',{
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [2,50]
+            len: [2, 50]
         }
     },
     lastName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [2,50]
+            len: [2, 50]
         }
     },
     email: {
@@ -31,13 +30,7 @@ const Users = db.define('users',{
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            is: {
-                args: /^(?=.*[A-Z])(?=.*[a-z]).{8,}$/,
-                msg: 'Password must contain at least one uppercase letter, one lowercase letter, and be at least 8 characters long'
-            }
-        }
+        allowNull: false
     },
     gender: {
         type: DataTypes.STRING,
