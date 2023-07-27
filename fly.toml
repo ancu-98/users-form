@@ -1,0 +1,15 @@
+# fly.toml app configuration file generated for ancu98-users-crud on 2023-07-13T22:22:56-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "ancu98-users-crud"
+primary_region = "bog"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

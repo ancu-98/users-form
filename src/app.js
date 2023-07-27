@@ -1,13 +1,7 @@
 //? Dependencies
 const express = require('express');
 const cors = require('cors');
-
-//? Files
-const config = require('../config');
-const db = require('./utils/database');
-const initModels = require('./models/initModels');
-const userRouter = require('./users/users.router');
-const authRouter = require('./auth/auth.router');
+const {Client} = require('pg');
 
 //? Initial Configs
 
@@ -16,6 +10,28 @@ const app = express();
 app.use(express.json());
 //? Enable CORS
 app.use(cors());
+
+//? Database Server Conection
+const client = new Client({
+    connectionString: process.env.DATABASE_URL
+})
+
+app.get("/ping", async (req, res) => {
+    await client.connect();
+    const result = await client.query('SELECT $1::text as message', ['Hello world!'])
+    console.log(result.rows[0].message) 
+    await client.end()
+    res.json(result.rows[0]);
+})
+
+
+//? Files
+const config = require('../config');
+const db = require('./utils/database');
+const initModels = require('./models/initModels');
+const userRouter = require('./users/users.router');
+const authRouter = require('./auth/auth.router');
+
 
 //? Authenticate DB
 db.authenticate()
